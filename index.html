@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数式表示ページ</title>
+    <title>数式ページ</title>
 
-    <!-- 💡 魔法の1行：これを入れるだけで、自動で数式に変えてくれます -->
+    <!-- 1. 安全な数式システム（MathJax）を読み込む -->
     <script id="MathJax-script" async src="https://jsdelivr.net"></script>
 </head>
 <body>
@@ -14,14 +14,32 @@
     <p>GitHub Pagesで数式を表示するテストです。</p>
 
     <h2>1. 文の中にある数式（インライン表示）</h2>
-    <p>アインシュタインの有名な式は \( E=mc^2 \) です。このように文章の中に混ぜることができます。</p>
+    <p>アインシュタインの有名な式は <span class="math">E=mc^2</span> です。このように文章の中に混ぜることができます。</p>
 
     <h2>2. 独立した大きな数式（ディスプレイ表示）</h2>
     <p>一行を丸ごと使って大きく数式を出したいときは、以下のように書きます。</p>
-    $$ \int_{a}^{b} f(x) \, dx = F(b) - F(a) $$
+    <div class="math" data-display="true">\int_{a}^{b} f(x) \, dx = F(b) - F(a)</div>
 
     <p>二次方程式の解の公式も綺麗に出ます：</p>
-    $$ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
+    <div class="math" data-display="true">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</div>
 
+
+    <!-- 💡 魔法のプログラム：GitHubのブロックをすり抜けた後で、記号を自動でくっつけます -->
+    <script>
+        window.MathJax = {
+            startup: {
+                ready: () => {
+                    document.querySelectorAll('.math').forEach(el => {
+                        if (el.getAttribute('data-display') === 'true') {
+                            el.textContent = '$$' + el.textContent + '$$';
+                        } else {
+                            el.textContent = '\\(' + el.textContent + '\\)';
+                        }
+                    });
+                    MathJax.startup.defaultReady();
+                }
+            }
+        };
+    </script>
 </body>
 </html>
