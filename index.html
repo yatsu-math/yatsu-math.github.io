@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KaTeX数式ページ</title>
 
-    <!-- 1. 見た目（CSS）を読み込む -->
-    <link rel="stylesheet" href="https://jsdelivr.net">
-
-    <!-- 2. 動かす仕組み（JS）を読み込む -->
-    <script src="https://jsdelivr.net"></script>
+    <!-- 💡 最も安定している配信サイト（cdnjs）から見た目の部品を読み込みます -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
+    <!-- 💡 動かす仕組みも同じ場所から確実に読み込みます -->
+    <script src="https://cloudflare.com"></script>
 </head>
 <body>
 
@@ -26,19 +26,17 @@
     <p>二次方程式の解の公式も綺麗に出ます：</p>
     <div id="eq3"></div>
 
-
-    <!-- 💡 GitHubの自動変換に絶対に邪魔されない、安全な埋め込みプログラム -->
     <script>
-        window.onload = function() {
-            // 1. アインシュタインの式
-            katex.render("E=mc^2", document.getElementById("eq1"), { displayMode: false });
-            
-            // 2. 積分
-            katex.render("\\int_{a}^{b} f(x) \\, dx = F(b) - F(a)", document.getElementById("eq2"), { displayMode: true });
-            
-            // 3. 解の公式
-            katex.render("x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", document.getElementById("eq3"), { displayMode: true });
-        };
+        // 画面がすべて読み込まれたら、確実に数式を描き出します
+        window.addEventListener('DOMContentLoaded', function() {
+            try {
+                katex.render("E=mc^2", document.getElementById("eq1"), { displayMode: false });
+                katex.render("\\int_{a}^{b} f(x) \\, dx = F(b) - F(a)", document.getElementById("eq2"), { displayMode: true });
+                katex.render("x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", document.getElementById("eq3"), { displayMode: true });
+            } catch (e) {
+                console.error(e);
+            }
+        });
     </script>
 </body>
 </html>
