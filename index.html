@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数式ページ</title>
-
-    <!-- 💡 トラブルの起きない最も確実な配信元から、MathJax（数式システム）を読み込みます -->
-    <script src="https://cloudflare.com" async></script>
+    <title>美しい数式ページ</title>
+    <style>
+        /* 画面をきれいに整える設定 */
+        body { font-family: sans-serif; line-height: 1.8; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .math-center { text-align: center; margin: 30px 0; }
+        img { vertical-align: middle; }
+    </style>
 </head>
 <body>
 
@@ -14,15 +17,20 @@
     <p>GitHub Pagesで数式を表示するテストです。</p>
 
     <h2>1. 文の中にある数式（インライン表示）</h2>
-    <!-- 💡 GitHubの自動書き換えを完全にスルーさせるための、最も安全な記述方法です -->
-    <p>アインシュタインの有名な式は \( E=mc^2 \) です。このように文章の中に混ぜることができます。</p>
+    <p>アインシュタインの有名な式は <img src="https://codecogs.com^2" alt="E=mc^2"> です。このように文章の中に混ぜることができます。</p>
 
     <h2>2. 独立した大きな数式（ディスプレイ表示）</h2>
     <p>一行を丸ごと使って大きく数式を出したいときは、以下のように書きます。</p>
-    \[ \int_{a}^{b} f(x) \, dx = F(b) - F(a) \]
+    
+    <div class="math-center">
+        <img src="https://codecogs.com?\int_{a}^{b}f(x)dx=F(b)-F(a)" height="40" alt="積分">
+    </div>
 
     <p>二次方程式の解の公式も綺麗に出ます：</p>
-    \[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
+    
+    <div class="math-center">
+        <img src="https://codecogs.com?x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" height="50" alt="解の公式">
+    </div>
 
 </body>
 </html>
