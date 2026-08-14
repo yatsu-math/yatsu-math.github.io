@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KaTeX数式ページ</title>
 
-    <!-- 1. 見た目（CSS）を先に読み込む -->
+    <!-- 1. 見た目（CSS）を読み込む -->
     <link rel="stylesheet" href="https://jsdelivr.net">
+
+    <!-- 2. 動かす仕組み（JS）を読み込む（deferをつけて順番待ちさせます） -->
+    <script defer src="https://jsdelivr.net"></script>
+
+    <!-- 3. 自動で数式に変換するプラグイン（読み込みが完全に終わったら実行） -->
+    <script defer src="https://jsdelivr.net"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
 </head>
 <body>
 
@@ -14,29 +26,16 @@
     <p>GitHub Pagesで数式を表示するテストです。</p>
 
     <h2>1. 文の中にある数式（インライン表示）</h2>
-    <p>アインシュタインの有名な式は <span class="math-inline">E=mc^2</span> です。このように文章の中に混ぜることができます。</p>
+    <!-- 💡 数式を \( と \) で挟むのが最も安全なルールです -->
+    <p>アインシュタインの有名な式は \( E=mc^2 \) です。このように文章の中に混ぜることができます。</p>
 
     <h2>2. 独立した大きな数式（ディスプレイ表示）</h2>
     <p>一行を丸ごと使って大きく数式を出したいときは、以下のように書きます。</p>
-    <div class="math-display">\int_{a}^{b} f(x) \, dx = F(b) - F(a)</div>
+    <!-- 💡 大きな数式は \[ と \] で挟みます -->
+    \[ \int_{a}^{b} f(x) \, dx = F(b) - F(a) \]
 
     <p>二次方程式の解の公式も綺麗に出ます：</p>
-    <div class="math-display">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</div>
+    \[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
 
-
-    <!-- 3. 動かす仕組みをここで読み込み、その場ですぐに変身させる -->
-    <script src="https://jsdelivr.net"></script>
-    <script>
-        (function() {
-            var inlines = document.querySelectorAll('.math-inline');
-            for (var i = 0; i < inlines.length; i++) {
-                katex.render(inlines[i].textContent, inlines[i], { displayMode: false });
-            }
-            var displays = document.querySelectorAll('.math-display');
-            for (var j = 0; j < displays.length; j++) {
-                katex.render(displays[j].textContent, displays[j], { displayMode: true });
-            }
-        })();
-    </script>
 </body>
 </html>
