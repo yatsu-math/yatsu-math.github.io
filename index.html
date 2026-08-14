@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KaTeX数式ページ</title>
 
-    <!-- 💡 外部ではなく、自分のリポジトリの中にあるファイルを読み込みます -->
+    <!-- 自分のリポジトリ内のファイルを安全に読み込みます -->
     <link rel="stylesheet" href="katex.min.css">
     <script src="katex.min.js"></script>
 </head>
@@ -24,17 +24,15 @@
     <p>二次方程式の解の公式も綺麗に出ます：</p>
     <div id="eq3"></div>
 
+    <!-- 💡 お互いに邪魔をしない、最も安全な命令の出し方に変更しました -->
     <script>
-        // 自分のリポジトリ内にあるKaTeXを使って、その場で数式を描き出します
-        window.onload = function() {
-            try {
+        (function() {
+            if (typeof katex !== 'undefined') {
                 katex.render("E=mc^2", document.getElementById("eq1"), { displayMode: false });
                 katex.render("\\int_{a}^{b} f(x) \\, dx = F(b) - F(a)", document.getElementById("eq2"), { displayMode: true });
                 katex.render("x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", document.getElementById("eq3"), { displayMode: true });
-            } catch (e) {
-                console.error(e);
             }
-        };
+        })();
     </script>
 </body>
 </html>
