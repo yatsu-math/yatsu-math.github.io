@@ -3,34 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>美しい数式ページ</title>
-    <style>
-        /* 画面をきれいに整える設定 */
-        body { font-family: sans-serif; line-height: 1.8; padding: 20px; max-width: 800px; margin: 0 auto; }
-        .math-center { text-align: center; margin: 30px 0; }
-        img { vertical-align: middle; }
-    </style>
+    <title>KaTeX数式ページ</title>
+
+    <!-- 💡 外部ではなく、自分のリポジトリの中にあるファイルを読み込みます -->
+    <link rel="stylesheet" href="katex.min.css">
+    <script src="katex.min.js"></script>
 </head>
 <body>
 
-    <h1>数式ページ</h1>
+    <h1>KaTeXを使った数式ページ</h1>
     <p>GitHub Pagesで数式を表示するテストです。</p>
 
     <h2>1. 文の中にある数式（インライン表示）</h2>
-    <p>アインシュタインの有名な式は <img src="https://codecogs.com^2" alt="E=mc^2"> です。このように文章の中に混ぜることができます。</p>
+    <p>アインシュタインの有名な式は <span id="eq1"></span> です。このように文章の中に混ぜることができます。</p>
 
     <h2>2. 独立した大きな数式（ディスプレイ表示）</h2>
     <p>一行を丸ごと使って大きく数式を出したいときは、以下のように書きます。</p>
-    
-    <div class="math-center">
-        <img src="https://codecogs.com?\int_{a}^{b}f(x)dx=F(b)-F(a)" height="40" alt="積分">
-    </div>
+    <div id="eq2"></div>
 
     <p>二次方程式の解の公式も綺麗に出ます：</p>
-    
-    <div class="math-center">
-        <img src="https://codecogs.com?x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" height="50" alt="解の公式">
-    </div>
+    <div id="eq3"></div>
 
+    <script>
+        // 自分のリポジトリ内にあるKaTeXを使って、その場で数式を描き出します
+        window.onload = function() {
+            try {
+                katex.render("E=mc^2", document.getElementById("eq1"), { displayMode: false });
+                katex.render("\\int_{a}^{b} f(x) \\, dx = F(b) - F(a)", document.getElementById("eq2"), { displayMode: true });
+                katex.render("x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", document.getElementById("eq3"), { displayMode: true });
+            } catch (e) {
+                console.error(e);
+            }
+        };
+    </script>
 </body>
 </html>
