@@ -3,40 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KaTeX数式ページ</title>
+    <title>数式ページ</title>
 
-    <!-- 💡 最も安定している配信サイト（cdnjs）から見た目の部品を読み込みます -->
-    <link rel="stylesheet" href="https://cloudflare.com">
-    
-    <!-- 💡 動かす仕組みも同じ場所から確実に読み込みます -->
-    <script src="https://cloudflare.com"></script>
+    <!-- 💡 外部ファイルを一切使わず、ブラウザの標準機能だけで数式を組み立てる最も安全な仕組みです -->
+    <style>
+        .math-style { font-family: 'Times New Roman', Times, serif; font-style: italic; }
+        .display-box { text-align: center; margin: 20px 0; font-size: 1.2rem; }
+        .fraction { display: inline-block; vertical-align: middle; text-align: center; font-size: 0.95rem; }
+        .fraction span { display: block; padding: 0 4px; }
+        .fraction .numerator { border-bottom: 1px solid black; }
+        .sqrt { border-top: 1px solid black; padding-top: 1px; margin-left: 2px; }
+    </style>
 </head>
 <body>
 
-    <h1>KaTeXを使った数式ページ</h1>
+    <h1>数式ページ</h1>
     <p>GitHub Pagesで数式を表示するテストです。</p>
 
     <h2>1. 文の中にある数式（インライン表示）</h2>
-    <p>アインシュタインの有名な式は <span id="eq1"></span> です。このように文章の中に混ぜることができます。</p>
+    <p>アインシュタインの有名な式は <span class="math-style">E = mc<sup>2</sup></span> です。このように文章の中に混ぜることができます。</p>
 
     <h2>2. 独立した大きな数式（ディスプレイ表示）</h2>
     <p>一行を丸ごと使って大きく数式を出したいときは、以下のように書きます。</p>
-    <div id="eq2"></div>
+    
+    <div class="display-box class="math-style"">
+        <span style="font-size: 1.6rem; vertical-align: middle;">∫</span><sub><span class="math-style">a</span></sub><sup><span class="math-style">b</span></sup> <span class="math-style">f(x) dx = F(b) - F(a)</span>
+    </div>
 
     <p>二次方程式の解の公式も綺麗に出ます：</p>
-    <div id="eq3"></div>
+    
+    <div class="display-box class="math-style"">
+        <span class="math-style">x</span> = 
+        <div class="fraction">
+            <span class="numerator">-<span class="math-style">b</span> ± <span style="font-size: 0.95rem; vertical-align: top;">√</span><span class="sqrt"><span class="math-style">b</span><sup>2</sup> - 4<span class="math-style">ac</span></span></span>
+            <span>2<span class="math-style">a</span></span>
+        </div>
+    </div>
 
-    <script>
-        // 画面がすべて読み込まれたら、確実に数式を描き出します
-        window.addEventListener('DOMContentLoaded', function() {
-            try {
-                katex.render("E=mc^2", document.getElementById("eq1"), { displayMode: false });
-                katex.render("\\int_{a}^{b} f(x) \\, dx = F(b) - F(a)", document.getElementById("eq2"), { displayMode: true });
-                katex.render("x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", document.getElementById("eq3"), { displayMode: true });
-            } catch (e) {
-                console.error(e);
-            }
-        });
-    </script>
 </body>
 </html>
