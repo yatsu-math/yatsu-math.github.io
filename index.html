@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>美しい数式ページ</title>
     <style>
-        /* 💡 プログラムを使わず、文字の見た目だけで数式を作る設定 */
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.8; padding: 20px; max-width: 800px; margin: 0 auto; }
+        /* 💡 文字が絶対に縦に崩れないようにする最新の設定 */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; padding: 20px; max-width: 800px; margin: 0 auto; }
         .math { font-family: "Times New Roman", Times, serif; font-style: italic; font-size: 1.2rem; }
-        .math-display { text-align: center; margin: 30px 0; font-family: "Times New Roman", Times, serif; font-size: 1.3rem; }
         
-        /* 分数を作るための設定 */
-        .fraction { display: inline-block; vertical-align: middle; text-align: center; font-size: 1.1rem; margin: 0 4px; }
-        .fraction span { display: block; padding: 0 4px; }
-        .fraction .numerator { border-bottom: 1.5px solid black; }
+        /* 数式を真ん中に綺麗に並べる設定 */
+        .math-display { display: flex; justify-content: center; align-items: center; margin: 30px 0; font-family: "Times New Roman", Times, serif; font-size: 1.4rem; }
         
-        /* ルート（根号）を作るための設定 */
-        .sqrt-symbol { font-size: 1.3rem; vertical-align: top; font-style: normal; margin-right: -3px; }
+        /* 分数を上下に分ける設定（横方向には崩れません） */
+        .fraction { display: inline-flex; flex-direction: column; align-items: center; margin: 0 6px; }
+        .numerator { border-bottom: 1.5px solid black; width: 100%; text-align: center; padding-bottom: 2px; display: inline-flex; align-items: center; justify-content: center; }
+        .denominator { width: 100%; text-align: center; padding-top: 2px; }
+        
+        /* ルートと中身を横に並べる設定 */
+        .sqrt-box { display: inline-flex; align-items: center; }
+        .sqrt-symbol { font-size: 1.5rem; font-style: normal; margin-right: -1px; vertical-align: middle; }
         .sqrt-content { border-top: 1.5px solid black; padding-top: 1px; display: inline-block; }
     </style>
 </head>
@@ -31,19 +34,24 @@
     <h2>2. 独立した大きな数式（ディスプレイ表示）</h2>
     <p>一行を丸ごと使って大きく数式を出したいときは、以下のように書きます。</p>
     
-    <!-- 積分記号の表示 -->
     <div class="math-display">
-        <span style="font-size: 2rem; vertical-align: middle; font-style: normal;">∫</span><sub>a</sub><sup>b</sup> f(x) dx = F(b) - F(a)
+        <span style="font-size: 2.2rem; margin-right: 2px; font-style: normal;">∫</span><sub>a</sub><sup>b</sup> f(x) dx = F(b) - F(a)
     </div>
 
     <p>二次方程式の解の公式も綺麗に出ます：</p>
     
-    <!-- 解の公式の表示 -->
     <div class="math-display">
         x = 
         <div class="fraction">
-            <span class="numerator">-b ± <span class="sqrt-symbol">√</span><span class="sqrt-content">b<sup>2</sup> - 4ac</span></span>
-            <span>2a</span>
+            <!-- 💡 分子の中身が横一列に並ぶように囲み方を修正しました -->
+            <span class="numerator">
+                -b ± 
+                <span class="sqrt-box">
+                    <span class="sqrt-symbol">√</span>
+                    <span class="sqrt-content">b<sup>2</sup> - 4ac</span>
+                </span>
+            </span>
+            <span class="denominator">2a</span>
         </div>
     </div>
 
